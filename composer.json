@@ -1,0 +1,25 @@
+{
+    "name": "uicosss/aits_person_lookup_confidential",
+    "description": "PHP Wrapper API for the AITS Person Lookup Confidential API",
+    "type": "library",
+    "require": {
+        "php": "^7.2.34",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^7.5.1"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Uicosss\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jeremy Jones",
+            "email": "jkjones3@uic.edu",
+            "homepage": "https://osss.uic.edu/"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
