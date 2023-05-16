@@ -6,8 +6,8 @@
  * @author Dan Paz-Horta, Jeremy Jones
  */
 
-use Uicosss\AitsPersonLookupConfidential;
 use GuzzleHttp\Exception\GuzzleException;
+use Uicosss\AITS\PersonLookupConfidential;
 
 try {
 
@@ -31,8 +31,8 @@ try {
         throw new Exception("Error: Specify Subscription Key from AITS Azure API as the 2nd argument.");
     }
 
-    // Call the AITS EnterpriseUser API
-    $personAPI = new AitsPersonLookupConfidential($argv[1], $argv[2]);
+    // Call the AITS Person Lookup Confidential
+    $personAPI = new PersonLookupConfidential($argv[1], $argv[2]);
 
     // Get the results of a call
     $personAPI->findPerson($argv[3]);

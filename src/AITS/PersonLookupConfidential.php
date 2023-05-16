@@ -1,23 +1,24 @@
 <?php
 
 /**
- * University of Illinois - AITS Person Lookup Confidential
+ * University of Illinois - PersonLookupConfidential Person Lookup Confidential
  * API Wrapper
  *
  * @author Jeremy Jones
  * @license MIT
  */
 
-namespace Uicosss;
+namespace Uicosss\AITS;
 
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\ServerException;
 
-class AitsPersonLookupConfidential
+class PersonLookupConfidential
 {
     protected $apiUrl;
     protected $subscriptionKey;
@@ -66,7 +67,7 @@ class AitsPersonLookupConfidential
      * assign the API response values to the object variables.
      *
      * @param string $lookupKey NetID or UIN lookup value
-     * @throws Exception
+     * @throws Exception|GuzzleException
      */
     public function findPerson(string $lookupKey): void
     {
@@ -256,6 +257,5 @@ class AitsPersonLookupConfidential
 
         return preg_replace("/@(.*?)$/", "", trim($lookupKey));
     }
-
 
 }
