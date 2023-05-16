@@ -1,7 +1,7 @@
 <?php
 
 /**
- * University of Illinois - PersonLookupConfidential Person Lookup Confidential
+ * University of Illinois - AITS Person Lookup Confidential
  * API Wrapper
  *
  * @author Jeremy Jones
