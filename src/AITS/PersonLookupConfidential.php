@@ -47,6 +47,8 @@ class PersonLookupConfidential
     
     protected $raw = '';
 
+    protected $httpCode = 500;
+
     /**
      * Sets the two necessary variables for the AITS API call to operate successfully
      *
@@ -84,6 +86,7 @@ class PersonLookupConfidential
 
             $response = $client->send($request);
 
+            $this->httpCode = $response->getStatusCode();
             $this->raw = $response->getBody();
             $this->json = json_decode($response->getBody(), true);
 
@@ -140,8 +143,9 @@ class PersonLookupConfidential
             $this->address = $this->json['list'][0]['address'] ?? [];
 
         } catch (ClientException $ex) {
+            $this->httpCode = $ex->getCode();
             $json = json_decode($ex->getResponse()->getBody(), true);
-            throw new Exception('Response Code: ' . $ex->getCode() . ' | Error: ' . (json_last_error() == JSON_ERROR_NONE ? $json['message'] : ''));
+            throw new Exception(json_last_error() == JSON_ERROR_NONE ? $json['message'] : '');
         } catch (ServerException|BadResponseException|Exception $ex) {
             throw new Exception($ex->getMessage());
         }
@@ -214,9 +218,14 @@ class PersonLookupConfidential
      * @param bool $raw Boolean flag for whether to return raw JSON string or decoded JSON array
      * @return mixed Will return the JSON string or decoded JSON array
      */
-    public function getResponse(bool $raw = false): string
+    public function getResponse(bool $raw = false)
     {
         return ($raw) ? $this->raw : $this->json;
+    }
+
+    public function getHttpResponseCode()
+    {
+        return $this->httpCode;
     }
 
     /**

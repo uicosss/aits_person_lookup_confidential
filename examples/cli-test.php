@@ -37,6 +37,8 @@ try {
     // Get the results of a call
     $personAPI->findPerson($argv[3]);
 
+    echo "HTTP Code: [" . $personAPI->getHttpResponseCode() . "]" . PHP_EOL;
+
     echo "UIN: [" . $personAPI->getUin() . "]" . PHP_EOL;
     echo "First Name: [" . $personAPI->getFirstName() . "]" . PHP_EOL;
     echo "Last Name: [" . $personAPI->getLastName() . "]" . PHP_EOL;
