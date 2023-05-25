@@ -261,7 +261,7 @@ class PersonLookupConfidential
     private function checkLookupKey(string $lookupKey)
     {
         if (strlen($lookupKey) == 0) {
-            throw new Exception('lookupKey cannot be blank.');
+            throw new Exception('NetID or UIN cannot be blank.');
         }
 
         return preg_replace("/@(.*?)$/", "", trim($lookupKey));
