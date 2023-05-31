@@ -53,7 +53,7 @@ try {
         echo " - " . $d . PHP_EOL;
     }
     echo "Email: [" . $personAPI->getEmail() . "]" . PHP_EOL;
-    echo "Has FERPA data?: [" . (($personAPI->hasFerpaData()) ? 'Yes' : 'No') . "]" . PHP_EOL;
+    echo "Has FERPA Suppressed data?: [" . (($personAPI->isFerpaSuppressed()) ? 'Yes' : 'No') . "]" . PHP_EOL;
     echo "Is employee?: [" . (($personAPI->isEmployee()) ? 'Yes' : 'No') . "]" . PHP_EOL;
     echo "Employee title: [" . (($personAPI->isEmployee()) ? $personAPI->getTitle() : '') . "]" . PHP_EOL;
 

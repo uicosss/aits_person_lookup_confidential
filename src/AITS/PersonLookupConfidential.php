@@ -23,21 +23,21 @@ class PersonLookupConfidential
     protected $apiUrl;
     protected $subscriptionKey;
 
-    protected $uin = '';
+    protected $uin = 0;
 
-    protected $firstName = '';
+    protected $firstName = null;
 
-    protected $lastName = '';
+    protected $lastName = null;
 
     protected $netIDs = [];
 
     protected $campusDomains = [];
 
-    protected $ferpa = false;
+    protected $ferpaSuppressed = false;
 
-    protected $email = '';
+    protected $email = null;
 
-    protected $title = '';
+    protected $title = null;
 
     protected $employee = [];
 
@@ -77,7 +77,7 @@ class PersonLookupConfidential
 
         $client = new Client();
 
-        $request = new Request('GET', 'https://' . $this->apiUrl . '/' . $lookupKey, [
+        $request = new Request('GET', $this->apiUrl . $lookupKey, [
             'Cache-Control' => 'no-cache',
             'Ocp-Apim-Subscription-Key' => $this->subscriptionKey
         ]);
@@ -126,7 +126,7 @@ class PersonLookupConfidential
 
             // Whether the UIN has FERPA suppressed data
             if (!empty($this->json['list'][0]['confidentialInd']) && $this->json['list'][0]['confidentialInd'] == 'Y') {
-                $this->ferpa = true;
+                $this->ferpaSuppressed = true;
             }
 
             // Edge cases where the email is not present, this element would not exist in the response
@@ -199,9 +199,9 @@ class PersonLookupConfidential
         return $this->campusDomains;
     }
 
-    public function hasFerpaData(): bool
+    public function isFerpaSuppressed(): bool
     {
-        return $this->ferpa;
+        return $this->ferpaSuppressed;
     }
 
     public function isEmployee(): bool
@@ -229,7 +229,7 @@ class PersonLookupConfidential
     }
 
     /**
-     * @param string $apiUrl AITS API URL without leading "https:" or trailing "/"
+     * @param string $apiUrl AITS API URL with protocol, trailing slash optional
      * @throws Exception
      */
     private function setApiUrl(string $apiUrl)
@@ -238,7 +238,7 @@ class PersonLookupConfidential
             throw new Exception("The apiUrl cannot be blank. Please contact AITS for the Azure Gateway API URLs.");
         }
 
-        $this->apiUrl = trim($apiUrl);
+        $this->apiUrl = (substr(trim($apiUrl), -1) == '/') ? trim($apiUrl) : trim($apiUrl) . '/';
     }
 
     /**
