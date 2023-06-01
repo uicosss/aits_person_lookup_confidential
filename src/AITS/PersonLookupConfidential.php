@@ -43,7 +43,7 @@ class PersonLookupConfidential
 
     protected $address = [];
     
-    protected $json = null;
+    protected $json = [];
     
     protected $raw = '';
 
@@ -168,16 +168,16 @@ class PersonLookupConfidential
 
     public function getEmail(): string
     {
-        return str_replace('.xxxyyyzzz', '', $this->email);
+        return $this->email;
     }
 
     /**
      * @param int $k Optional key to pull a specific NetID
      * @return string
      */
-    public function getNetID(int $k = 0): string
+    public function getNetID(int $k = 0): ?string
     {
-        return $this->netIDs[$k]['netId'] ?? '';
+        return $this->netIDs[$k]['netId'] ?? null;
     }
 
     public function getAllNetIDs(): array
@@ -189,9 +189,9 @@ class PersonLookupConfidential
      * @param int $k Optional key to pull a specific NetID's Campus Domain
      * @return string
      */
-    public function getDomain(int $k = 0): string
+    public function getDomain(int $k = 0): ?string
     {
-        return $this->netIDs[$k]['campusDomain'] ?? '';
+        return $this->netIDs[$k]['campusDomain'] ?? null;
     }
 
     public function getAllDomains(): array
