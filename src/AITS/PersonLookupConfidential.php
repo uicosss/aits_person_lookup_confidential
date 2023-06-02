@@ -107,7 +107,7 @@ class PersonLookupConfidential
 
             // Default UIN to blank if not detected
             // todo: Should an empty UIN trigger an exception instead? Is that even possible?
-            $this->uin = $this->json['list'][0]['uin'] ?? '';
+            $this->uin = $this->json['list'][0]['uin'] ?? 0;
 
             // Just in case they are not present we can default to blank
             $this->firstName = $this->json['list'][0]['name']['firstName'] ?? '';
@@ -151,7 +151,7 @@ class PersonLookupConfidential
         }
     }
 
-    public function getUin(): string
+    public function getUin(): int
     {
         return $this->uin;
     }
