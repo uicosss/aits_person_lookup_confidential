@@ -163,7 +163,7 @@ class PersonLookupConfidential
 
     public function getLastName(): string
     {
-        return $this->firstName;
+        return $this->lastName;
     }
 
     public function getEmail(): string
