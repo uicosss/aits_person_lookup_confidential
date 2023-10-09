@@ -110,8 +110,8 @@ class PersonLookupConfidential
             $this->uin = $this->json['list'][0]['uin'] ?? 0;
 
             // Just in case they are not present we can default to blank
-            $this->firstName = $this->json['list'][0]['name']['firstName'] ?? '';
-            $this->lastName = $this->json['list'][0]['name']['lastName'] ?? '';
+            $this->firstName = $this->json['list'][0]['name']['firstName'] ?? null;
+            $this->lastName = $this->json['list'][0]['name']['lastName'] ?? null;
 
             // Each element contains a "netId" and "campusDomain"
             foreach ($this->json['list'][0]['netIds'] as $n) {
@@ -130,7 +130,7 @@ class PersonLookupConfidential
             }
 
             // Edge cases where the email is not present, this element would not exist in the response
-            $this->email = $this->json['list'][0]['email']['emailAddress'] ?? '';
+            $this->email = $this->json['list'][0]['email']['emailAddress'] ?? null;
 
             // Title is not within the employee element, going to keep it the same here
             // todo: if title is present is that enough to say they are an employee?
@@ -145,7 +145,7 @@ class PersonLookupConfidential
         } catch (ClientException $ex) {
             $this->httpCode = $ex->getCode();
             $json = json_decode($ex->getResponse()->getBody(), true);
-            throw new Exception(json_last_error() == JSON_ERROR_NONE ? $json['message'] : '');
+            throw new Exception(json_last_error() == JSON_ERROR_NONE ? $json['message'] : 'Error');
         } catch (ServerException|BadResponseException|Exception $ex) {
             throw new Exception($ex->getMessage());
         }
