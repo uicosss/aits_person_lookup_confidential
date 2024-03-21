@@ -142,7 +142,7 @@ class PersonLookupConfidential
             $this->employee = $this->json['list'][0]['employee'] ?? [];
 
             // Employees organization description
-            $this->organizationDescription = $this->json['list'][0]['employee']['organizationDesc'] ?? null;
+            $this->organizationDescription = $this->json['list'][0]['employee']['organizationDesc'] ?? '';
 
             // Capture address field, may never use
             $this->address = $this->json['list'][0]['address'] ?? [];
