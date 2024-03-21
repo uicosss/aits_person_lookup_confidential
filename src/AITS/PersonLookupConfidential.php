@@ -39,8 +39,6 @@ class PersonLookupConfidential
 
     protected $title = null;
 
-    protected $organizationDescription = null;
-
     protected $employee = [];
 
     protected $address = [];
@@ -141,9 +139,6 @@ class PersonLookupConfidential
             // Employees will have extra data present, may never use
             $this->employee = $this->json['list'][0]['employee'] ?? [];
 
-            // Employees organization description
-            $this->organizationDescription = $this->json['list'][0]['employee']['organizationDesc'] ?? '';
-
             // Capture address field, may never use
             $this->address = $this->json['list'][0]['address'] ?? [];
 
@@ -179,11 +174,6 @@ class PersonLookupConfidential
     public function getEmployee(): array
     {
         return $this->employee;
-    }
-
-    public function getOrganizationDescription(): string
-    {
-        return $this->organizationDescription;
     }
 
     /**
