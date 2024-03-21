@@ -171,6 +171,11 @@ class PersonLookupConfidential
         return $this->email;
     }
 
+    public function getEmployee(): array
+    {
+        return $this->employee;
+    }
+
     /**
      * @param int $k Optional key to pull a specific NetID
      * @return string
