@@ -110,8 +110,8 @@ class PersonLookupConfidential
             $this->uin = $this->json['list'][0]['uin'] ?? 0;
 
             // Just in case they are not present we can default to blank
-            $this->firstName = $this->json['list'][0]['name']['firstName'] ?? null;
-            $this->lastName = $this->json['list'][0]['name']['lastName'] ?? null;
+            $this->firstName = $this->json['list'][0]['name']['firstName'] ?? '';
+            $this->lastName = $this->json['list'][0]['name']['lastName'] ?? '';
 
             // Each element contains a "netId" and "campusDomain"
             foreach ($this->json['list'][0]['netIds'] as $n) {
@@ -130,7 +130,7 @@ class PersonLookupConfidential
             }
 
             // Edge cases where the email is not present, this element would not exist in the response
-            $this->email = $this->json['list'][0]['email']['emailAddress'] ?? null;
+            $this->email = $this->json['list'][0]['email']['emailAddress'] ?? '';
 
             // Title is not within the employee element, going to keep it the same here
             // todo: if title is present is that enough to say they are an employee?
@@ -156,17 +156,17 @@ class PersonLookupConfidential
         return $this->uin;
     }
 
-    public function getFirstName(): ?string
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
 
-    public function getLastName(): ?string
+    public function getLastName(): string
     {
         return $this->lastName;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
