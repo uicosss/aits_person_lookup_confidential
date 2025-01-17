@@ -21,12 +21,12 @@ try {
         throw new Exception("Error: Specify NetId or UIN as the 3rd argument.");
     }
 
-    // Subscription Key from Azure Gateway API
+    // API URL
     if(empty($argv[1])){
         throw new Exception("Error: Specify API URL as the 1st argument.");
     }
 
-    // API URL
+    // Subscription Key from Azure Gateway API
     if(empty($argv[2])){
         throw new Exception("Error: Specify Subscription Key from AITS Azure API as the 2nd argument.");
     }
