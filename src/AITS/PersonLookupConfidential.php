@@ -106,8 +106,8 @@ class PersonLookupConfidential
             // All data will currently be assigned to variables with the class object.
 
             // UIN is a required piece of information from the API, if missing it is considered an error
-            if (!isset($this->json['list'][0]['uin']) || empty($this->json['list'][0]['uin'])) {
-                throw new Exception('UIN not found in results');
+            if (!isset($this->json['list'][0]['uin']) || !preg_match('/^(\d{9})?$/', $this->json['list'][0]['uin'])) {
+                throw new Exception('Valid UIN not found in results');
             }
 
             $this->uin = $this->json['list'][0]['uin'];
@@ -161,7 +161,7 @@ class PersonLookupConfidential
 
     public function getFirstName(): ?string
     {
-        return  $this->firstName;
+        return $this->firstName;
     }
 
     public function getLastName(): ?string
